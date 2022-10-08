@@ -5,7 +5,17 @@
  */
 
 module.exports = {
+  siteMetadata:{
+    title:`Fanhole`,
+    description:`
+    18禁繪師，目前主畫原神色圖和漫畫，
+    尻派！！
+    胸部只不過是屁股的替代品而已！
+    然後會時時更新、謝謝(⁠｡⁠･⁠ω⁠･⁠｡⁠)⁠ﾉ⁠♡`
+  },
   plugins: [
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-emotion`,
       options: {
@@ -17,5 +27,12 @@ module.exports = {
         cssPropOptimization: true,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options:{
+        name:`src`,
+        path:`${__dirname}/src/`
+      }
+    }
   ],
 }
