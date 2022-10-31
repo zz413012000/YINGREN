@@ -1,48 +1,54 @@
-import React from 'react';
-import { useState  } from 'react';
+import React ,{ useState  } from 'react';
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from "@fortawesome/free-solid-svg-icons"
-import { faAnglesRight } from "@fortawesome/free-solid-svg-icons"
-// import SwitchContainer from '../container/SwitchContainer';
+import { faBars,faAnglesRight } from "@fortawesome/free-solid-svg-icons"
+import Breadcrumb from './Breadcrumb';
 const NavbarUi = styled.div`
     box-sizing: border-box;
+    display:flex;
     width:100%;
-    height:29px;
-    position:relative;
-    border:1px solid #000;
+    min-height:29px;
+    padding:5px;
     `
-let barsStyle=css`
+const barsStyle=css`
     pointer-events: none;
+
+`
+const SidebarSwitch=styled.button`
+background-color: rgb(0,0,0,0);
+border:none;
+min-width:20px;
+min-height:18px;
     &:hover {
-        background-color: red;
+        background-color: rgb(250,230,230);
+    }
+    &:active{
+        background-color: rgb(245,225,225);
     }
 `
-let SidebarSwitch=styled.div`
-    width:20px;
-    padding:5px;
-`
-export default function Navbar({SidebarOption,handleSwitch}){
+
+export default function Navbar({SidebarOption,handleSwitch,location,crumbLabel}){
     let [on,setOn]=useState(true)
     function handleOver(){
-        if(on){
-            setOn(!on)
-        }
+        if(on){setOn(!on)}
     }
     function handleOut(){
-        if(!on){
-            setOn(!on)
-        }
+        if(!on){setOn(!on)}
     }
+
     return (
         <NavbarUi>
             <SidebarSwitch  onMouseOver={handleOver} onMouseOut={handleOut} onClick={handleSwitch} css={css`
             display:${SidebarOption?"block":"none"};
-           
-            `}>
-                {on?<FontAwesomeIcon style={!on?{backgroundColor:'red'}:undefined} css={barsStyle} icon={faBars} />:<FontAwesomeIcon css={barsStyle} icon={faAnglesRight} />}
+            `}
+            >
+                {on?<FontAwesomeIcon  css={barsStyle} icon={faBars} />:<FontAwesomeIcon css={barsStyle} icon={faAnglesRight} />}
             </SidebarSwitch>
+                <Breadcrumb 
+                location={location}
+                crumbLabel={crumbLabel}
+                />
         </NavbarUi>
     )
 }   

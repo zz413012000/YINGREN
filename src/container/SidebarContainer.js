@@ -7,6 +7,11 @@ const mapStateToProps = state =>{
 }
 const mapDispatchToProps = dispatch => {
     return {
+        handleSwitch(){
+            dispatch({
+                type:"UPDATE_SWITCH"
+            })
+        }
     }
 }
 const SidebarContainer = connect(

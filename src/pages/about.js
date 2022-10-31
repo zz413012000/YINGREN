@@ -1,13 +1,24 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import Container from '../components/Container'
-const about = () => {
+const about = ({data,location}) => {
     return (
-        <Container>
+        <Container location={location} crumbLabel={'關於我'}>
             <div>
                 <h1>關於我</h1>
-                <p>這裡禁止一切血腥，否則只好麥當勞歡樂送了</p>
+                <p>{data.site.siteMetadata.description}</p>
             </div>
         </Container>
     )
 }
 export default about
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+  }
+`
