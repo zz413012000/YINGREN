@@ -4,7 +4,7 @@ ghpages.publish(
   'public',
   {
     branch: 'master',
-    repo: 'https://github.com/zz413012000/Fanhole.github.io.git',
+    repo: 'https://github.com/zz413012000/YINGREN.github.io.git',
   },
   () => {
     console.log('Deploy Complete!');

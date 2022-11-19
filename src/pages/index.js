@@ -20,10 +20,14 @@ const Title = styled.div`
 `
 const Description = styled.div`
   text-align:center;
-`
+  white-space: pre-line;
+  line-height: 1.5em;
+  `
+  // white-space: pre-line
 
 
 export default function Home({ data, location }) {
+  console.log(data.site.siteMetadata.description)
   return (
     <Container location={location} crumbLabel={"首頁"}>
       <IndexContainer>
@@ -35,11 +39,11 @@ export default function Home({ data, location }) {
         </Content>
         <Banner>
             <StaticImage // gatsby-plugin-image
-            src='../image/10.jpeg'
+            src='../image/20220320_3.jpeg'
             placeholder="blurred"
             // aspectRatio={16/9}
             layout="fullWidth"
-            alt='Barbara'
+            alt='路人超能 酒窩'
             // width={100%}
             // height={auto}
             />
@@ -52,7 +56,14 @@ export default function Home({ data, location }) {
 
 export const query = graphql`
   query {
-    file(relativePath: { eq: "image/11.JPG" }) {
+    file(relativePath: { eq: "image/20220415第一次畫墮姬妓夫太郎完整-1.jpeg" }) {
+      childImageSharp {
+        fluid(maxWidth: 4000, maxHeight: 2800) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    bgImage:file(relativePath: { eq: "image/20221015.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 4000, maxHeight: 2800) {
           ...GatsbyImageSharpFluid

@@ -8,7 +8,7 @@ const ProgressUi=styled.div`
     top:50vh;
     width:100%;
     z-index:4;
-    transform:rotate(-3.5deg);
+    transform:rotate(-3.5deg) translateX(-8px);
     `
 const Trail = styled.div`
     width:100%;

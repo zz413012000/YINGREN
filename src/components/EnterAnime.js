@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import Progress from "../components/Progress"
+
+
 import BackgroundImage from 'gatsby-background-image'
+import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import { convertToBgImage } from "gbimage-bridge"
+
+
+import { graphql, useStaticQuery } from 'gatsby'
 
 const EnterAnimeUi = styled.div`
   position:fixed;
@@ -62,6 +69,32 @@ export default function EnterAnime({data}) {
             });
         }, 30);
     },[]);
+    // const {enterData} = useStaticQuery(
+    //     graphql`
+    //       query {
+    //         enterData: file(relativePath: { eq: "image/20221015.jpg" }) {
+    //             childImageSharp {
+    //               fluid(maxWidth: 4000, maxHeight: 2800) {
+    //                 ...GatsbyImageSharpFluid
+    //               }
+    //             }
+    //         }
+    //       }
+    //     `
+    //   )
+    const { bgImage } = useStaticQuery(
+        graphql`
+        query {
+            bgImage:file(relativePath: { eq: "image/20221015.jpg" }) {
+              childImageSharp {
+                gatsbyImageData(quality: 90)
+              }
+            }
+          }
+        `
+      )
+      const image = getImage(bgImage)
+      const backgroundImage= convertToBgImage(image)
     return (
         <EnterAnimeUi 
         css={css`opacity:${animeIsOpen?"1":"0"};`}
@@ -80,11 +113,17 @@ export default function EnterAnime({data}) {
              css={css`width:${curtainIsOpen?"100":"102"}%`}
             >
                 <BackgroundImage
-                    fluid={data.file.childImageSharp.fluid}
+                    fluid={data.bgImage.childImageSharp.fluid}
+                    // {...backgroundImage}
+                    // preserveStackingContext
                     css={css`
                     height:100vh;
                     `}
-                />
+                >
+                  {/* <div style={{minHeight: 1000, minWidth: 1000}}>
+                    <GatsbyImage image={image} alt={"testimage"}/>
+                  </div> */}
+                </BackgroundImage>
             </EnterAnimePicBottom>
         </EnterAnimeUi>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import Container from '../components/Container'
 import styled from '@emotion/styled'
 import Card from '../components/Card'
-import  data from '../model/illustrator'
+import  illustratorData from '../model/illustrator'
 const Main = styled.main`
   border:1px solid #000;
   display:flex;
@@ -30,9 +30,10 @@ const illustrator = ({location}) => {
     <Container location={location} crumbLabel={'插圖作品'}>
       <Main>
           {/* <h1>圖片</h1> */}
-          {data.map((item,index)=>{
+          {illustratorData.map((item,index)=>{
+            console.log("src:",item.src)
             return (
-              <Card height={item.height} description={item.description} key={index}></Card>
+              <Card height={item.height} description={item.description} src={item.src} key={index}></Card>
             )
           })}
       </Main>
